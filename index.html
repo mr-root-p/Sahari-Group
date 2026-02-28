@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sahari Group | صيانة عامة متكاملة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" href="icon.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;700;900&family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --gold-dim: rgba(201,168,76,0.12);
+      --gold-border: rgba(201,168,76,0.25);
+      --transition: 0.35s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg:        #0D0D0D;
+      --bg-2:      #141414;
+      --bg-card:   #181818;
+      --bg-alt:    #141414;
+      --text:      #F5F0E8;
+      --text-sub:  rgba(245,240,232,0.55);
+      --text-muted:#888;
+      --border:    rgba(201,168,76,0.12);
+      --nav-bg:    rgba(13,13,13,0.93);
+      --input-bg:  rgba(255,255,255,0.04);
+    }
+
+    [data-theme="light"] {
+      --bg:        #F7F5F0;
+      --bg-2:      #EDEBE5;
+      --bg-card:   #FFFFFF;
+      --bg-alt:    #F0EDE5;
+      --text:      #1A1A1A;
+      --text-sub:  rgba(26,26,26,0.6);
+      --text-muted:#777;
+      --border:    rgba(201,168,76,0.2);
+      --nav-bg:    rgba(247,245,240,0.94);
+      --input-bg:  rgba(0,0,0,0.04);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* Language visibility */
+    [data-lang="ar"] .en { display: none !important; }
+    [data-lang="en"] .ar { display: none !important; }
+
+    /* ====== NAVBAR ====== */
+    nav {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 56px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px; font-weight: 900;
+      color: #0D0D0D;
+      font-family: 'Playfair Display', serif;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1.1;
+      font-family: 'Tajawal', sans-serif;
+      transition: color var(--transition);
+    }
+
+    .logo-text span {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-center a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.75;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-center a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; right: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    [data-lang="en"] .nav-center a::after { right: auto; left: 0; }
+
+    .nav-center a:hover { opacity: 1; color: var(--gold); }
+    .nav-center a:hover::after { width: 100%; }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-pill {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px;
+      gap: 2px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .toggle-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 13px;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.25s;
+      white-space: nowrap;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .toggle-btn.active { background: var(--gold); color: #0D0D0D; }
+
+    .theme-toggle {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      transition: all 0.25s;
+    }
+
+    .theme-toggle:hover { border-color: var(--gold); transform: rotate(20deg); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: #0D0D0D;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ====== HERO ====== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 56px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 50%, rgba(201,168,76,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 20% 85%, rgba(201,168,76,0.04) 0%, transparent 55%);
+    }
+
+    [data-theme="light"] .hero-bg {
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 50%, rgba(201,168,76,0.1) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 20% 85%, rgba(201,168,76,0.07) 0%, transparent 55%);
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 580px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 28px;
+      animation: fadeInDown 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.4; transform:scale(1.5); }
+    }
+
+    .hero h1 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(38px, 5.5vw, 74px);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      color: var(--text);
+      animation: fadeInUp 0.9s ease 0.1s both;
+    }
+
+    [data-lang="en"] .hero h1 { font-family: 'Playfair Display', serif; }
+    .hero h1 .gold { color: var(--gold); }
+
+    .hero p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--text-sub);
+      max-width: 480px;
+      margin-bottom: 38px;
+      font-weight: 300;
+      animation: fadeInUp 0.9s ease 0.2s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.9s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #0D0D0D;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(201,168,76,0.28);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-visual {
+      position: absolute;
+      left: 56px; top: 50%;
+      transform: translateY(-50%);
+      width: 430px;
+      animation: fadeInLeft 1s ease 0.4s both;
+    }
+
+    [data-lang="en"] .hero-visual { left: auto; right: 56px; }
+
+    .hero-img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 190px 190px;
+      gap: 10px;
+    }
+
+    .hero-img-slot {
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .hero-img-slot:first-child { grid-row: span 2; }
+    .hero-img-slot img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ====== STATS ====== */
+    .stats-row {
+      display: flex;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .stat-item {
+      flex: 1;
+      padding: 36px 24px;
+      text-align: center;
+      border-left: 1px solid var(--border);
+      transition: border-color var(--transition);
+    }
+
+    .stat-item:last-child { border-left: none; }
+    [data-lang="en"] .stat-item { border-left: none; border-right: 1px solid var(--border); }
+    [data-lang="en"] .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label { font-size: 13px; color: var(--text-muted); }
+
+    /* ====== SECTIONS ====== */
+    .section { padding: 86px 56px; }
+    .section-alt { background: var(--bg-alt); transition: background var(--transition); }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .section-title {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(26px, 3.5vw, 44px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    [data-lang="en"] .section-title { font-family: 'Playfair Display', serif; }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--text-sub);
+      font-weight: 300;
+      max-width: 450px;
+      line-height: 1.85;
+      margin-bottom: 50px;
+    }
+
+    /* ====== SERVICES ====== */
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+
+    .service-card {
+      background: var(--bg-card);
+      padding: 40px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px; height: 0;
+      background: var(--gold);
+      transition: height 0.4s;
+    }
+
+    [data-lang="en"] .service-card::before { right: auto; left: 0; }
+    .service-card:hover::before { height: 100%; }
+    [data-theme="light"] .service-card:hover { background: #F9F7F2; }
+    [data-theme="dark"] .service-card:hover { background: #1C1C1C; }
+
+    .service-icon {
+      width: 50px; height: 50px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 22px;
+      transition: all 0.3s;
+    }
+
+    .service-card:hover .service-icon { background: rgba(201,168,76,0.2); border-color: var(--gold); }
+
+    .service-card h3 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    [data-lang="en"] .service-card h3 { font-family: 'Playfair Display', serif; font-size: 17px; }
+
+    .service-card > p { font-size: 13px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+
+    .service-img-slot {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--gold-dim);
+      border: 1px dashed var(--gold-border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .service-img-slot img { width:100%; height:100%; object-fit:cover; }
+
+    /* ====== IMAGE PLACEHOLDER ====== */
+    .img-ph {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%; height: 100%;
+      padding: 20px;
+      color: var(--gold-border);
+    }
+
+    .img-ph svg { width: 32px; height: 32px; }
+    .img-ph span { font-size: 11px; text-align: center; color: var(--text-muted); }
+
+    /* ====== GALLERY ====== */
+    .gallery-masonry { columns: 3; column-gap: 12px; }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, background var(--transition);
+    }
+
+    .gallery-item img { width:100%; display:block; transition: transform 0.5s; }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-ph {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--gold-border);
+      padding: 44px 20px;
+    }
+
+    .gallery-ph svg { width: 36px; height: 36px; }
+    .gallery-ph span { font-size: 12px; color: var(--text-muted); }
+
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 14px;
+    }
+
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-tag {
+      background: var(--gold);
+      color: #0D0D0D;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* ====== WHY US ====== */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+
+    .why-img-area { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .why-img-box {
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .why-img-box img { width:100%; height:100%; object-fit:cover; }
+    .why-img-box:first-child { grid-column: span 2; aspect-ratio: 16/7; }
+
+    .feature-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 20px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, background var(--transition);
+    }
+
+    .feature-item:hover { border-color: var(--gold-border); }
+
+    .feature-num {
+      width: 38px; height: 38px;
+      background: var(--gold-dim);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .feature-item h4 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    [data-lang="en"] .feature-item h4 { font-family: 'Lato', sans-serif; }
+    .feature-item p { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
+
+    /* ====== CONTACT ====== */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .contact-form h3 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--gold);
+    }
+
+    [data-lang="en"] .contact-form h3 { font-family: 'Playfair Display', serif; }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s, background var(--transition), color var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { min-height: 108px; resize: vertical; }
+    .form-group select option { background: var(--bg-2); color: var(--text); }
+
+    .contact-info-block h2 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    [data-lang="en"] .contact-info-block h2 { font-family: 'Playfair Display', serif; }
+    .contact-info-block > p { font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-bottom: 32px; }
+
+    .contact-items { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; }
+
+    .ci-icon {
+      width: 44px; height: 44px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+
+    .ci-info h4 { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+    .ci-info p { font-size: 15px; font-weight: 600; color: var(--text); }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 34px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+    .footer-copy span { color: var(--gold); }
+
+    /* ====== WHATSAPP ====== */
+    .wa-float {
+      position: fixed;
+      bottom: 26px; left: 26px;
+      width: 54px; height: 54px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s;
+      text-decoration: none;
+    }
+
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(26px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity:0; transform:translateY(-18px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity:0; transform:translate(-26px,-50%); }
+      to   { opacity:1; transform:translate(0,-50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 1100px) {
+      nav { padding: 13px 26px; }
+      .nav-center { gap: 18px; }
+      .hero { padding: 110px 26px 60px; }
+      .hero-visual { display: none; }
+      .section { padding: 60px 26px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 34px; }
+      .gallery-masonry { columns: 2; }
+      footer { flex-direction: column; gap: 14px; text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-center { display: none; }
+      .nav-controls { gap: 5px; }
+      .toggle-btn { padding: 5px 9px; font-size: 11px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-masonry { columns: 1; }
+      .stats-row { flex-wrap: wrap; }
+      .stat-item { min-width: 50%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="logo" href="icon.jpg">
+    <div class="logo-text">
+      Sahari Group
+      <span class="ar">للصيانة العامة</span>
+      <span class="en">General Maintenance</span>
+    </div>
+  </a>
+
+  <ul class="nav-center">
+    <li><a href="#services"><span class="ar">خدماتنا</span><span class="en">Services</span></a></li>
+    <li><a href="#gallery"><span class="ar">أعمالنا</span><span class="en">Portfolio</span></a></li>
+    <li><a href="#why"><span class="ar">لماذا نحن</span><span class="en">Why Us</span></a></li>
+    <li><a href="#contact"><span class="ar">تواصل</span><span class="en">Contact</span></a></li>
+  </ul>
+
+  <div class="nav-controls">
+    <div class="toggle-pill" id="langToggle">
+      <button class="toggle-btn active" data-lang-target="ar">عربي</button>
+      <button class="toggle-btn" data-lang-target="en">EN</button>
+    </div>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀️</button>
+    <a href="https://api.whatsapp.com/send/?phone=971547902297&text&type=phone_number&app_absent=0" class="nav-cta ar">احصل على عرض</a>
+    <a href="https://api.whatsapp.com/send/?phone=971547902297&text&type=phone_number&app_absent=0" class="nav-cta en">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="ar">متخصصون في الصيانة العامة</span>
+      <span class="en">General Maintenance Experts</span>
+    </div>
+
+    <h1>
+      <span class="ar">خبراء<br><span class="gold">الصيانة والتجديد</span><br>لكل مكان</span>
+      <span class="en">Experts in<br><span class="gold">Renovation &amp;</span><br>Maintenance</span>
+    </h1>
+
+    <p>
+      <span class="ar">نقدم خدمات صيانة عامة شاملة — من صبغ العمائر والديكور والأبواب حتى التجديد الكامل من أول وجديد، بجودة لا تُنافَس.</span>
+      <span class="en">We provide comprehensive general maintenance services — from building painting and décor to doors and full renovations, delivered with unmatched quality.</span>
+    </p>
+
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary ar">احصل على تقييم مجاني ←</a>
+      <a href="#contact" class="btn-primary en">Get Free Assessment →</a>
+      <a href="#gallery" class="btn-secondary ar">شاهد أعمالنا</a>
+      <a href="#gallery" class="btn-secondary en">View Our Work</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-grid">
+      <div class="hero-img-slot">
+       <img src="/1.jpeg" alt="main">
+      </div>
+      <div class="hero-img-slot">
+        <img src="/2.jpeg" alt="main">
+      </div>
+      <div class="hero-img-slot">
+            <img src="/3.jpeg" alt="main">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-item reveal">
+    <div class="stat-num">500+</div>
+    <div class="stat-label ar">مشروع منجز</div>
+    <div class="stat-label en">Projects Done</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">10+</div>
+    <div class="stat-label ar">سنوات خبرة</div>
+    <div class="stat-label en">Years Experience</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">98%</div>
+    <div class="stat-label ar">رضا العملاء</div>
+    <div class="stat-label en">Client Satisfaction</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label ar">خدمة متواصلة</div>
+    <div class="stat-label en">Support Available</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section section-alt" id="services">
+  <div class="section-tag ar">خدماتنا</div>
+  <div class="section-tag en">Our Services</div>
+  <h2 class="section-title ar">كل ما تحتاجه<br>في مكان واحد</h2>
+  <h2 class="section-title en">Everything You Need<br>in One Place</h2>
+  <p class="section-sub ar">نتخصص في كافة أعمال الصيانة العامة بأعلى معايير الجودة والاحترافية.</p>
+  <p class="section-sub en">We specialize in all general maintenance works with the highest standards of quality and professionalism.</p>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🏢</div>
+      <h3><span class="ar"> صبغ بنايات </span><span class="en">Building Painting</span></h3>
+      <p><span class="ar">اصباغ خارجية وداخلية للمباني بأجود أنواع الطلاء وألوان تدوم لسنوات.</span><span class="en">Exterior and interior painting for buildings using premium paints that last for years.</span></p>
+      <div class="service-img-slot">
+      <img src="4.jpeg" alt=""> 
+      <img src="/5.jpeg" alt="">
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎨</div>
+      <h3><span class="ar">ديكور داخلي</span><span class="en">Interior Décor</span></h3>
+      <p><span class="ar">تصاميم ديكور داخلية عصرية وكلاسيكية تحول أي مكان إلى تحفة فنية.</span><span class="en">Modern and classic interior designs that transform any space into a masterpiece.</span></p>
+      <div class="service-img-slot">
+      <img src="/46.jpeg" alt="">
+      <img src="/7.jpeg" alt="">
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🚪</div>
+      <h3><span class="ar">أبواب ونوافذ</span><span class="en">Doors &amp; Windows</span></h3>
+      <p><span class="ar">تركيب وإصلاح وصيانة الأبواب والنوافذ بجميع أنواعها — خشب وألمنيوم وحديد.</span><span class="en">Installation, repair and maintenance of all types of doors and windows.</span></p>
+      <div class="service-img-slot">
+      <img src="/8.jpeg" alt="">
+            <img src="/9.jpeg" alt="">
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏠</div>
+      <h3><span class="ar">صبغ البيت</span><span class="en">House Painting</span></h3>
+      <p><span class="ar">صبغ  داخلية للمنازل والشقق بألوان متنوعة تلائم كل ذوق وميزانية.</span><span class="en">Interior painting for homes and apartments in diverse colors that suit every taste and budget.</span></p>
+      <div class="service-img-slot">
+       <img src="/10.jpeg" alt=""> 
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">✨</div>
+      <h3><span class="ar">تجديد شامل</span><span class="en">Full Renovation</span></h3>
+      <p><span class="ar">نعيد كل شيء من أول وجديد — تجديد كامل للمباني والشقق والمكاتب بكل تفاصيلها.</span><span class="en">We restore everything from scratch — full renovation of buildings, apartments, and offices.</span></p>
+      <div class="service-img-slot">
+        <img src="/12.jpeg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="section-tag ar">معرض الأعمال</div>
+  <div class="section-tag en">Our Portfolio</div>
+  <h2 class="section-title reveal ar">أعمالنا تتحدث<br>عن نفسها</h2>
+  <h2 class="section-title reveal en">Our Work Speaks<br>for Itself</h2>
+  <p class="section-sub reveal ar">مشاريع منفذة بأيدي فريقنا المتخصص — جودة تراها وتلمسها.</p>
+  <p class="section-sub reveal en">Projects executed by our expert team — quality you can see and feel.</p>
+
+  <div class="gallery-masonry">
+    <div class="gallery-item reveal" style="min-height:265px;">
+       <img src="/1.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:172px;">
+      <img src="/2.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:212px;">
+      <img src="/3.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:192px;">
+      <img src="/4.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:240px;">
+      <img src="/5.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:222px;">
+      <img src="/7.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:182px;">
+      <img src="/8.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/9.jpeg" alt="">
+    </div>
+    <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/10.jpeg" alt="">
+    </div>
+  <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/12.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/13.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/15.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/16.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/19.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/23.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/25.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/26.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/27.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/28.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/29.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/30.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/32.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/33.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/34.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/36.jpeg" alt="">
+    </div>
+     <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/38.jpeg" alt="">
+    </div>
+
+      <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/41.jpeg" alt="">
+    </div>
+      <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/42.jpeg" alt="">
+    </div>
+      <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/43.jpeg" alt="">
+    </div>
+      <div class="gallery-item reveal" style="min-height:200px;">
+      <img src="/44.jpeg" alt="">
+    </div>
+      <div class="gallery-item reveal" style="min-height:200px;">+-
+      <img src="/46.jpeg" alt="">
+    </div>
+  </div>
+    </div>
+    
+  </div>
+ </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-alt" id="why">
+  <div class="why-grid">
+    <div class="why-img-area reveal">
+      <div class="why-img-box">
+        <img src="/23.jpeg" alt="">
+      </div>
+      <div class="why-img-box">
+        <img src="/22.jpeg" alt="">
+      </div>
+      <div class="why-img-box">
+        <img src="/1.jpeg" alt="">
+      </div>  
+    </div>
+
+    <div>
+      <div class="section-tag ar">لماذا Sahari Group</div>
+      <div class="section-tag en">Why Sahari Group</div>
+      <h2 class="section-title reveal ar">التميز في كل<br>تفصيل صغير</h2>
+      <h2 class="section-title reveal en">Excellence in<br>Every Detail</h2>
+      <p class="section-sub reveal ar">نجمع بين الخبرة والاحترافية والالتزام بالمواعيد لنقدم لك تجربة صيانة لا مثيل لها.</p>
+      <p class="section-sub reveal en">We combine expertise, professionalism, and punctuality to deliver a maintenance experience like no other.</p>
+
+      <div class="feature-list">
+        <div class="feature-item reveal">
+          <div class="feature-num">01</div>
+          <div>
+            <h4><span class="ar">فريق متخصص ومحترف</span><span class="en">Expert Professional Team</span></h4>
+            <p><span class="ar">عمالة مدربة على أعلى مستوى مع خبرة تتجاوز ١٠ سنوات في مجال الصيانة.</span><span class="en">Highly trained workforce with over 10 years of experience in the maintenance field.</span></p>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-num">02</div>
+          <div>
+            <h4><span class="ar">أسعار تنافسية وشفافة</span><span class="en">Competitive &amp; Transparent Pricing</span></h4>
+            <p><span class="ar">لا مفاجآت في الأسعار — نقدم تقييمًا مجانيًا قبل بدء أي عمل.</span><span class="en">No hidden costs — we provide a free assessment before starting any work.</span></p>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-num">03</div>
+          <div>
+            <h4><span class="ar">ضمان على الأعمال</span><span class="en">Work Guarantee</span></h4>
+            <p><span class="ar">جميع أعمالنا مضمونة. نلتزم بالجودة ونصلح أي خلل بدون تكلفة إضافية.</span><span class="en">All our work is guaranteed. We fix any defect at no extra cost.</span></p>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-num">04</div>
+          <div>
+            <h4><span class="ar">سرعة في التنفيذ</span><span class="en">Fast Execution</span></h4>
+            <p><span class="ar">نحترم وقتك — ننجز مشاريعنا في الوقت المحدد دون تأخير.</span><span class="en">We respect your time — projects are completed on schedule without delay.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info-block">
+      <div class="section-tag ar">تواصل معنا</div>
+      <div class="section-tag en">Contact Us</div>
+      <h2 class="reveal ar">ابدأ مشروعك<br>معنا اليوم</h2>
+      <h2 class="reveal en">Start Your Project<br>With Us Today</h2>
+      <p class="reveal ar">تواصل معنا الآن للحصول على تقييم مجاني وعرض سعر لمشروعك. فريقنا جاهز للمساعدة.</p>
+      <p class="reveal en">Contact us now for a free assessment and price offer for your project. Our team is ready to help.</p>
+
+      <div class="contact-items">
+        <div class="contact-item reveal">
+          <div class="ci-icon">📞</div>
+          <div class="ci-info">
+            <h4><span class="ar">تواصل معنا</span><span class="en">Contact us</span></h4>
+      <p class="reveal ar">2297 790 54 971+</p>
+      <p>info@sahari.group  </p>
+      <p class="reveal en">+971 54 790 2297</p>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="ci-icon">💬</div>
+          <div class="ci-info">
+            <h4>WhatsApp</h4>
+              <p class="reveal ar">2297 790 54 971+</p>
+      <p class="reveal en">+971 54 790 2297</p>
+
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="ci-icon">📍</div>
+          <div class="ci-info">
+            <h4><span class="ar">الموقع</span><span class="en">Location</span></h4>
+            <p><span class="ar">ابوظبي</span><span class="en">abu Dabe</span></p>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="ci-icon">🕐</div>
+          <div class="ci-info">
+            <h4><span class="ar">ساعات العمل</span><span class="en">Working Hours</span></h4>
+            <p><span class="ar">السبت – الخميس | ٧ص – ١٠م</span><span class="en">Sat – Thu | 7AM – 10PM</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+        </select>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">
+    <div class="logo-text">
+      Sahari Group
+      <span class="ar">للصيانة العامة</span>
+      <span class="en">General Maintenance</span>
+    </div>
+  </div>
+  <p class="footer-copy ar">جميع الحقوق محفوظة © 2026 <span>Sahari Group</span></p>
+        <p>info@sahari.group  </p>
+
+  <p class="footer-copy en">All Rights Reserved © 2026 <span>Sahari Group</span></p>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/971547902297" class="wa-float" target="_blank" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  const html = document.documentElement;
+
+
+
+
+
+  function setLang(lang) {
+    html.setAttribute('data-lang', lang);
+    html.setAttribute('lang', lang);
+    html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.querySelectorAll('[data-lang-target]').forEach(b => {
+      b.classList.toggle('active', b.dataset.langTarget === lang);
+    });
+
+
+    try { localStorage.setItem('sg-lang', lang); } catch(e) {}
+  }
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+    try { localStorage.setItem('sg-theme', theme); } catch(e) {}
+  }
+
+  document.querySelectorAll('[data-lang-target]').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.langTarget));
+  });
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  // Init
+  try {
+    const sl = localStorage.getItem('sg-lang');
+    const st = localStorage.getItem('sg-theme');
+    if (sl) setLang(sl); else setLang('ar');
+    if (st) setTheme(st);
+  } catch(e) { setLang('ar'); }
+
+  // Scroll reveal
+  const revObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 65);
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+  
+</script>
+</body>
+</html>
